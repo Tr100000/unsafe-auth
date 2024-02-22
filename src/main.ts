@@ -15,15 +15,25 @@ console.debug("Algorithm: " + totp.algorithm);
 console.debug("Digits: " + totp.digits);
 console.debug("Period: " + totp.period);
 
+if (searchParams.has("secret")) {
+    secretInput.value = searchParams.get("secret")!;
+    generateToken();
+    copyToken();
+}
+
 copyButton.addEventListener("click", async () => {
     generateToken();
-    await navigator.clipboard.writeText(tokenText.innerHTML);
+    await copyToken();
 });
 
 function generateToken() {
     totp.secret = Auth.Secret.fromBase32(secretInput.value);
     tokenText.innerHTML = totp.generate();
     copyButton.hidden = !tokenText.innerHTML;
+}
+
+async function copyToken() {
+    await navigator.clipboard.writeText(tokenText.innerHTML);
 }
 
 function maybeGetSearchParam(name: string, fallback: number): number {
