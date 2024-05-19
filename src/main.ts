@@ -6,38 +6,33 @@ const tokenText = document.getElementById("token") as HTMLParagraphElement;
 const copyButton = document.getElementById("copy") as HTMLButtonElement;
 
 const totp = new Auth.TOTP({
-    algorithm: searchParams.get("algorithm") ?? "SHA1",
-    digits: maybeGetSearchParam("digits", 6),
-    period: maybeGetSearchParam("period", 30)
+  algorithm: searchParams.get("algorithm") ?? "SHA1",
+  digits: maybeGetSearchParam("digits", 6),
+  period: maybeGetSearchParam("period", 30),
 });
 
-console.debug("Algorithm: " + totp.algorithm);
-console.debug("Digits: " + totp.digits);
-console.debug("Period: " + totp.period);
-
 if (searchParams.has("secret")) {
-    secretInput.value = searchParams.get("secret")!;
-    generateToken();
-    copyToken();
+  secretInput.value = searchParams.get("secret")!;
+  generateToken();
 }
 
 copyButton.addEventListener("click", async () => {
-    generateToken();
-    await copyToken();
+  generateToken();
+  await copyToken();
 });
 
 function generateToken() {
-    totp.secret = Auth.Secret.fromBase32(secretInput.value);
-    tokenText.innerHTML = totp.generate();
-    copyButton.hidden = !tokenText.innerHTML;
+  totp.secret = Auth.Secret.fromBase32(secretInput.value);
+  tokenText.innerHTML = totp.generate();
+  copyButton.hidden = !tokenText.innerHTML;
 }
 
 async function copyToken() {
-    await navigator.clipboard.writeText(tokenText.innerHTML);
+  await navigator.clipboard.writeText(tokenText.innerHTML);
 }
 
 function maybeGetSearchParam(name: string, fallback: number): number {
-    return searchParams.has(name) ? parseInt(searchParams.get(name)!) : fallback;
+  return searchParams.has(name) ? parseInt(searchParams.get(name)!) : fallback;
 }
 
 setInterval(generateToken, 500);
