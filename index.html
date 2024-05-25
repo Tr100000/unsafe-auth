@@ -1,15 +1,27 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Unsafe Auth</title>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="src/style.css" />
+    <title>Unsafe Auth</title>
   </head>
 
   <body>
-    <input type="text" id="secret" />
-    <p id="token"></p>
-    <button id="copy">Copy</button>
+    <div id="container">
+      <input type="text" id="secret" placeholder="Auth key..." />
+      <div>
+        <p id="token"></p>
+        <button id="copy">
+          Copy
+          <span class="material-symbols-outlined">content_copy</span>
+        </button>
+      </div>
+    </div>
   </body>
 
   <script type="module" src="/src/main.ts"></script>

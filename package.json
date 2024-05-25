@@ -7,12 +7,14 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "prettier . --check"
+    "test": "prettier . --check",
+    "check-updates": "npx npm-check-updates"
   },
   "dependencies": {
     "otpauth": "^9.2.4"
   },
   "devDependencies": {
+    "@types/node": "^20.12.12",
     "prettier": "^3.2.5",
     "typescript": "^5.4.5",
     "vite": "^5.2.11"
