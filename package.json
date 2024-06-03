@@ -11,7 +11,7 @@
     "check-updates": "npx npm-check-updates"
   },
   "dependencies": {
-    "otpauth": "^9.2.4"
+    "otpauth": "^9.3.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.12",
